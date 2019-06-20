@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TODOApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using TODOApp.Data;
 
 namespace TODOApp
 {
@@ -40,7 +42,13 @@ namespace TODOApp
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(config => {
+				var policy = new AuthorizationPolicyBuilder()
+									.RequireAuthenticatedUser()
+									.Build();
+				config.Filters.Add(new AuthorizeFilter(policy));
+			})
+			.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +87,7 @@ namespace TODOApp
 			{
 				using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
 				{
-					context.Database.Migrate();
+					//context.Database.Migrate();
 				}
 			}
 		}
