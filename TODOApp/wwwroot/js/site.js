@@ -3,5 +3,8 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-	$("#btnUploadPhoto").click(function () { alert(0); });
+	$("#btnUploadPhoto").click(function () 
+	{
+		
+	});
 });
