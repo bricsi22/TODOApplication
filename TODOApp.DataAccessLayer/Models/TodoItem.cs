@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TODOApp.DataAccessLayer.Models
 {
@@ -9,7 +10,7 @@ namespace TODOApp.DataAccessLayer.Models
 
 		public string Name { get; set; }
 
-		public string DeadLine { get; set; }
+		public DateTime DeadLine { get; set; }
 
 		public string Description { get; set; }
 
