@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using TODOApp.Data;
+using TODOApp.DataAccessLayer.Models;
 
 namespace TODOApp
 {
@@ -37,9 +32,11 @@ namespace TODOApp
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>()
+				{
+					options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), option => option.MigrationsAssembly("TODOApp.DataAccessLayer"));
+					
+				});
+			services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc(config => {
@@ -87,7 +84,7 @@ namespace TODOApp
 			{
 				using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
 				{
-					//context.Database.Migrate();
+					context.Database.Migrate();
 				}
 			}
 		}

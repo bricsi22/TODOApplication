@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TODOApp.DataAccessLayer.Models;
 
 namespace TODOApp.Data
 {
@@ -9,5 +10,14 @@ namespace TODOApp.Data
             : base(options)
         {
         }
-    }
+
+		public DbSet<TodoItem> TodoItem { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			base.OnModelCreating(builder);
+
+			builder.Entity<TodoItem>().HasOne(p => p.ApplicationUser).WithMany(m => m.TodoItems).HasForeignKey(f => f.UserId);
+		}
+	}
 }
