@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using TODOApp.Data;
 using TODOApp.DataAccessLayer.Models;
+using TODOApp.DataAccessLayer.Repository;
 
 namespace TODOApp
 {
@@ -46,7 +47,10 @@ namespace TODOApp
 				config.Filters.Add(new AuthorizeFilter(policy));
 			})
 			.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
+
+			services.AddTransient<ITodoItemRepository, TodoItemRepository>();
+			services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

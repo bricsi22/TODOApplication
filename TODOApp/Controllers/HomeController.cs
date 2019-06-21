@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TODOApp.DataAccessLayer.Repository;
 using TODOApp.Models;
 
 namespace TODOApp.Controllers
 {
     public class HomeController : Controller
     {
+		private ITodoItemRepository todoItemRepository;
+		public HomeController(ITodoItemRepository todoItemRepository)
+		{
+			this.todoItemRepository = todoItemRepository;
+		}
         public IActionResult Index()
         {
+			var todoItem = this.todoItemRepository.GetAll().FirstOrDefault();
             return View();
         }
 
