@@ -3,8 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TODOApp.Data;
+using TODOApp.DataAccessLayer.DatabaseContext;
 
 namespace TODOApp.DataAccessLayer.Migrations
 {
@@ -167,6 +166,8 @@ namespace TODOApp.DataAccessLayer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("PrimaryName");
+
+                    b.Property<byte[]>("ProfilePicture");
 
                     b.Property<string>("SecurityStamp");
 

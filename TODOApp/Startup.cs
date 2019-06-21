@@ -7,9 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using TODOApp.Data;
 using TODOApp.DataAccessLayer.Models;
 using TODOApp.DataAccessLayer.Repository;
+using TODOApp.DataAccessLayer.DatabaseContext;
 
 namespace TODOApp
 {

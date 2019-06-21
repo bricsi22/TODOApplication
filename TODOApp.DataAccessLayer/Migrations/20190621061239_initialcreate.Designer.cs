@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TODOApp.Data;
+using TODOApp.DataAccessLayer.DatabaseContext;
 
 namespace TODOApp.DataAccessLayer.Migrations
 {

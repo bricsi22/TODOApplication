@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using TODOApp.Data;
+using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.DataAccessLayer.Models;
 
 namespace TODOApp.DataAccessLayer.Repository

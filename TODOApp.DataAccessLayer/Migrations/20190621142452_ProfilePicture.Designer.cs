@@ -9,8 +9,8 @@ using TODOApp.DataAccessLayer.DatabaseContext;
 namespace TODOApp.DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190621142117_DeadLine")]
-    partial class DeadLine
+    [Migration("20190621142452_ProfilePicture")]
+    partial class ProfilePicture
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,6 +168,8 @@ namespace TODOApp.DataAccessLayer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("PrimaryName");
+
+                    b.Property<byte[]>("ProfilePicture");
 
                     b.Property<string>("SecurityStamp");
 

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TODOApp.DataAccessLayer.Models;
 
-namespace TODOApp.Data
+namespace TODOApp.DataAccessLayer.DatabaseContext
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

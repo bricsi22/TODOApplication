@@ -9,6 +9,8 @@ namespace TODOApp.DataAccessLayer.Models
 
 		public string PrimaryName { get; set; }
 
+		public byte[] ProfilePicture { get; set; }
+
 		public List<TodoItem> TodoItems { get; set; }
 	}
 }
