@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TODOApp.DataAccessLayer.Repository;
-using TODOApp.Models;
+using TODOApp.ViewModels;
 
 namespace TODOApp.Controllers
 {
@@ -15,7 +14,6 @@ namespace TODOApp.Controllers
 		}
         public IActionResult Index()
         {
-			var todoItem = this.todoItemRepository.GetAll().FirstOrDefault();
             return View();
         }
 

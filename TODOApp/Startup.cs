@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using TODOApp.DataAccessLayer.Models;
 using TODOApp.DataAccessLayer.Repository;
 using TODOApp.DataAccessLayer.DatabaseContext;
+using TODOApp.Managers;
+using TODOApp.Managers.Account;
 
 namespace TODOApp
 {
@@ -38,6 +40,7 @@ namespace TODOApp
 					
 				});
 			services.AddDefaultIdentity<ApplicationUser>()
+				.AddUserManager<UserManagerExtended>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc(config => {
@@ -48,8 +51,13 @@ namespace TODOApp
 			})
 			.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+			services.AddKendo();
+			// repositories
 			services.AddTransient<ITodoItemRepository, TodoItemRepository>();
 			services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
+
+			//managers
+			services.AddTransient<ProfilePictureManager>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

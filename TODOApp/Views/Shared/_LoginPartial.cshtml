@@ -1,31 +1,43 @@
 @using Microsoft.AspNetCore.Identity
+@using TODOApp.Managers
 @using TODOApp.DataAccessLayer.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject UserManagerExtended UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
-	
-	<div class="nav navbar-nav navbar-right">
-		<button type="button" id="btnUploadPhoto" class="btn btn-link navbar-btn navbar-link">Upload Photo</button>
-	</div>
-	
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
-            </li>
-        </ul>
-    </form>
+	@if (await UserManager.CurrentUserHasProfilePicture(User))
+	{
+
+		var imgSrc = await UserManager.GetBase64EncodedProfilePicture(User);
+		<div class="nav navbar-nav navbar-right">
+			<img src="@imgSrc" width="50" height="50" />
+			<button type="button" id="btnUploadPhoto" class="btn btn-link navbar-btn navbar-link" data-url="@Url.Action("ProfilePicture", "Account")">Change Photo</button>
+		</div>
+	}
+	else
+	{
+		<div class="nav navbar-nav navbar-right">
+			<button type="button" id="btnUploadPhoto" class="btn btn-link navbar-btn navbar-link" data-url="@Url.Action("ProfilePicture", "Account")">Upload Photo</button>
+		</div>
+	}
+	<form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+			</li>
+			<li>
+				<button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+			</li>
+		</ul>
+	</form>
+	<partial name="PhotoUpload"/>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    </ul>
+	<ul class="nav navbar-nav navbar-right">
+		<li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+		<li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+	</ul>
 }
