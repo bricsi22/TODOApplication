@@ -24,3 +24,23 @@ $(document).ready(function () {
 		$("#userPhotoWindow").data("kendoWindow").center();
 	});
 });
+
+function GetUserTodoItems(userId) {
+	var userTodoItemsWindow = $("#UserTodoItemsWindow").data("kendoWindow");
+	if (userTodoItemsWindow == null) {
+		$("#userTodoItemsWindow").kendoWindow({
+			width: "600px",
+			title: "User Photo",
+			modal: true,
+			visible: false,
+			actions: [
+				"Pin",
+				"Minimize",
+				"Maximize",
+				"Close"
+			]
+		});
+		userTodoItemsWindow = $("#UserTodoItemsWindow").data("kendoWindow");
+	}
+	userTodoItemsWindow.refresh();
+}
