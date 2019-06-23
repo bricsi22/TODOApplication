@@ -14,11 +14,13 @@ namespace TODOApp.Controllers
 			this.userManager = userManager;
 		}
 
+		#region User related methods
 		public IActionResult Index()
 		{
-			return View();
+			var viewModel = userManager.GetIndexViewModel(Url);
+			return View(viewModel);
 		}
-		#region User related methods
+
 		[HttpPost]
 		public IActionResult GetUsers([DataSourceRequest]DataSourceRequest request)
         {
@@ -48,13 +50,6 @@ namespace TODOApp.Controllers
 			return Json(new[] { userViewModel }.ToDataSourceResult(request, ModelState));
 		}
 
-		#endregion
-
-		#region User TodoItems related methods
-		public IActionResult UserTodoItems()
-		{
-			return View();
-		}
 		#endregion
 
 	}

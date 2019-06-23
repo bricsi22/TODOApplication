@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TODOApp.DataAccessLayer\TODOApp.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\TODOApp.Interface\TODOApp.Interface.csproj" />
     <ProjectReference Include="..\TODOApp.Managers\TODOApp.Managers.csproj" />
     <ProjectReference Include="..\TODOApp.ViewModels\TODOApp.ViewModels.csproj" />
   </ItemGroup>

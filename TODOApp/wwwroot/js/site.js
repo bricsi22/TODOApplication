@@ -14,6 +14,19 @@ $(document).ready(function () {
 			"Maximize",
 			"Close"
 		]
+	});
+
+	$("#userTodoItemsWindow").kendoWindow({
+		width: "600px",
+		title: "User Photo",
+		modal: true,
+		visible: false,
+		actions: [
+			"Pin",
+			"Minimize",
+			"Maximize",
+			"Close"
+		]
 	})
 
 	$("#btnUploadPhoto").click(function () 
@@ -27,10 +40,10 @@ $(document).ready(function () {
 
 function GetUserTodoItems(userId) {
 	var userTodoItemsWindow = $("#UserTodoItemsWindow").data("kendoWindow");
-	if (userTodoItemsWindow == null) {
-		$("#userTodoItemsWindow").kendoWindow({
+	if (!userTodoItemsWindow) {
+		userTodoItemsWindow = $("#UserTodoItemsWindow").kendoWindow({
 			width: "600px",
-			title: "User Photo",
+			title: "User Todo List",
 			modal: true,
 			visible: false,
 			actions: [
@@ -39,8 +52,11 @@ function GetUserTodoItems(userId) {
 				"Maximize",
 				"Close"
 			]
-		});
-		userTodoItemsWindow = $("#UserTodoItemsWindow").data("kendoWindow");
+		}).data("kendoWindow");
 	}
-	userTodoItemsWindow.refresh();
+	var refreshUrl = $("#UserTodoItemsUrl").val();
+	refreshUrl = refreshUrl.replace("/0", "/" + userId)
+	userTodoItemsWindow.refresh(refreshUrl);
+	userTodoItemsWindow.center();
+	userTodoItemsWindow.open();
 }

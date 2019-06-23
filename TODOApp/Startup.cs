@@ -16,6 +16,8 @@ using TODOApp.Managers.User;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using System;
+using TODOApp.Interface.SearchCriteria;
+using TODOApp.DataAccessLayer;
 
 namespace TODOApp
 {
@@ -65,12 +67,19 @@ namespace TODOApp
 
 			services.AddKendo();
 			// repositories
-			services.AddTransient<ITodoItemRepository, TodoItemRepository>();
-			services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
+			RepositoryConfiguration.ConfigureServices(services);
+
+
 
 			//managers
+			ManagerConfiguration.ConfigureServices(services);
 			services.AddTransient<ProfilePictureManager>();
 			services.AddTransient<UserManager>();
+			services.AddTransient<TodoManager>();
+
+			//search criterias
+			services.AddTransient<TodoItemSearchCriteria>();
+			services.AddTransient<UserSearchCriteria>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

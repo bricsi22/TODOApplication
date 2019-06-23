@@ -1,2 +1,32 @@
-﻿
+﻿@model TODOApp.ViewModels.User.UserViewModel
+
+@(Html.Kendo().Grid<TODOApp.ViewModels.User.UserTodoItemViewModel>()
+	.Name("UsersGrid")
+	.Columns(columns =>
+	{
+		columns.Bound(c => c.Id).Hidden();
+		columns.Bound(c => c.Name);
+
+		columns.Bound(c => c.Description);
+
+		columns.Bound(c => c.DeadLine).Format("{0:d}");
+
+		columns.Command(command => { command.Edit(); command.Destroy(); }).Width(172);
+	})
+	.Scrollable()
+	.Groupable()
+	.Sortable()
+	.Editable(editable => editable.Mode(GridEditMode.InLine))
+	.Pageable(pageable => pageable
+	.Refresh(true)
+	.PageSizes(true)
+	.ButtonCount(5))
+	.DataSource(dataSource => dataSource
+								.Ajax()
+								.Model(model => model.Id(p => p.Id))
+								.Update(update => update.Action("UpdateTodo", "Todo"))
+								.Destroy(update => update.Action("DeleteTodo", "Todo"))
+								.Read(read => read.Action("GetTodos", "Todo"))
+	)
+)
 

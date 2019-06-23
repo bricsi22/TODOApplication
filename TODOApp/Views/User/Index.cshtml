@@ -1,8 +1,10 @@
-﻿
+﻿@model  TODOApp.ViewModels.User.IndexViewModel
 @{
 	ViewData["Title"] = "Index";
-	var clientTemplateFormat = "<button class=\"btn btn-link navbar-btn navbar-link\" click='GetUserTodoItems({0})'>{1}</button>";
+	var clientTemplateFormat = "<button class=\"btn btn-link navbar-btn navbar-link\" onclick=\"GetUserTodoItems('{0}');\">{1}</button>";
 }
+	
+	<input asp-for="UserTodoItemsUrl" type="hidden" />
 
 @(Html.Kendo().Grid<TODOApp.ViewModels.User.UserViewModel>()
 	.Name("UsersGrid")
@@ -36,6 +38,7 @@
 								.Read(read => read.Action("GetUsers", "User"))
 	)
 	)
+
 <div id="UserTodoItemsWindow">
 
 </div>

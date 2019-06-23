@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TODOApp.Interface.SearchCriteria;
 using TODOApp.Managers;
 using TODOApp.Managers.Account;
 using TODOApp.ViewModels.Account;
@@ -20,8 +21,8 @@ namespace TODOApp.Controllers
         public async Task<IActionResult> ProfilePicture()
         {
 			var user = await userManagerExtended.GetUserAsync(this.User);
-			profilePictureManager.SetUser(user);
-			var viewModel = profilePictureManager.GetViewModel();
+			var userSearchCriteria = new UserSearchCriteria { Id = user.Id };
+			var viewModel = profilePictureManager.GetViewModel(searchCriteria: userSearchCriteria);
 			return PartialView(viewModel);
         }
 

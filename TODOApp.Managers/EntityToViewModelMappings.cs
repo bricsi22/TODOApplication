@@ -11,7 +11,12 @@ namespace TODOApp.Managers
 			// vica
 			CreateMap<UserViewModel, ApplicationUser>().ForMember(d => d.Id, option => option.Ignore());
 			// versa, currenty not used
-			CreateMap<ApplicationUser, ApplicationUser>();
+			CreateMap<ApplicationUser, UserViewModel>();
+
+			
+			CreateMap<UserTodoItemViewModel, TodoItem>();
+			// currently not used
+			CreateMap<TodoItem, UserTodoItemViewModel>();
 		}
 
 		public override string ProfileName

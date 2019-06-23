@@ -4,20 +4,35 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using TODOApp.DataAccessLayer.Models;
 using TODOApp.DataAccessLayer.Repository;
+using TODOApp.Interface.SearchCriteria;
 using TODOApp.Managers.Base;
 using TODOApp.ViewModels.User;
 
 namespace TODOApp.Managers.User
 {
-	public class UserManager : BaseManager<ApplicationUser, IApplicationUserRepository, UserViewModel>
+	public class UserManager : BaseManager<ApplicationUser, IApplicationUserRepository, UserViewModel, UserSearchCriteria, string>
 	{
-		public UserManager(IApplicationUserRepository applicationUserRepository, IMapper mapper) : base(applicationUserRepository, mapper)
+		public UserManager(IApplicationUserRepository applicationUserRepository, 
+						   IMapper mapper,
+						   UserSearchCriteria searchCriteria) : base(applicationUserRepository, mapper, searchCriteria)
 		{
 		}
-
-		public override UserViewModel GetViewModel(IUrlHelper urlHelper = null)
+		#region User related methods
+		public IndexViewModel GetIndexViewModel(IUrlHelper url)
 		{
-			throw new System.NotImplementedException();
+			var indexViewModel = new IndexViewModel();
+			indexViewModel.UserTodoItemsUrl = url.Action("UserTodoItems", "Todo", new { Id = "0" });
+			
+			return indexViewModel;
+		}
+
+		public override UserViewModel GetViewModel(UserSearchCriteria userSearchCriteria = null,
+												   IUrlHelper urlHelper = null)
+		{
+			viewModel = new UserViewModel();
+			entity = repository.Get(userSearchCriteria.Id);
+			mapper.Map(entity, viewModel);
+			return viewModel;
 		}
 
 		public IQueryable<UserViewModel> GetUserViewModels()
@@ -43,5 +58,21 @@ namespace TODOApp.Managers.User
 		{
 			repository.Delete(viewModel.Id);
 		}
+
+		public UserViewModel GetViewModelById(string id)
+		{
+			viewModel = new UserViewModel();
+			entity = repository.Get(id);
+			mapper.Map(entity, viewModel);
+			return viewModel;
+		}
+
+		#endregion
+
+		#region User Todo Items related methods
+
+
+
+		#endregion
 	}
 }
