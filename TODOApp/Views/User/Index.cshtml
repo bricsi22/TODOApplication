@@ -1,0 +1,42 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+	var clientTemplateFormat = "<button class=\"btn btn-link navbar-btn navbar-link\" click='GetUserTodoItems({0})'>{1}</button>";
+}
+
+@(Html.Kendo().Grid<TODOApp.ViewModels.User.UserViewModel>()
+	.Name("UsersGrid")
+	.Columns(columns =>
+	{
+		columns.Bound(c => c.Id).Hidden();
+		columns.Bound(c => c.FirstName)
+				.ClientTemplate(string.Format(clientTemplateFormat, "#=Id#", "#=FirstName#"));
+
+		columns.Bound(c => c.PrimaryName)
+				.ClientTemplate(string.Format(clientTemplateFormat, "#=Id#", "#=PrimaryName#"));
+
+		columns.Bound(c => c.UserEmail)
+				.ClientTemplate(string.Format(clientTemplateFormat, "#=Id#", "#=UserEmail#"));
+
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(172);
+	})
+	.Scrollable()
+	.Groupable()
+	.Sortable()
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+	.Pageable(pageable => pageable
+	.Refresh(true)
+	.PageSizes(true)
+	.ButtonCount(5))
+	.DataSource(dataSource => dataSource
+								.Ajax()
+								.Model(model => model.Id(p => p.Id))
+								.Update(update => update.Action("UpdateUser", "User"))
+								.Destroy(update => update.Action("DeleteUser", "User"))
+								.Read(read => read.Action("GetUsers", "User"))
+	)
+	)
+<div id="UserTodoItemsWindow">
+
+</div>
+

@@ -14,19 +14,19 @@ namespace TODOApp.Controllers
 		}
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","User");
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "TODO App description page.";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Contact page.";
 
             return View();
         }

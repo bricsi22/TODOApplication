@@ -37,7 +37,7 @@ namespace TODOApp.Managers
 		public async Task<bool> CurrentUserHasProfilePicture(ClaimsPrincipal claimsPrincipal)
 		{
 			var user = await GetUserAsync(claimsPrincipal);
-			return user.ProfilePicture != null;
+			return user != null && user.ProfilePicture != null;
 		}
 
 		public async Task<string> GetBase64EncodedProfilePicture(ClaimsPrincipal claimsPrincipal) {

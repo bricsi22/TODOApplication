@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
+﻿using System;
 using System.Linq;
 using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.DataAccessLayer.Models;
@@ -38,17 +36,28 @@ namespace TODOApp.DataAccessLayer.Repository
 			applicationDbContext.SaveChanges();
 			return success;
 		}
-
-		#region Not Implemented on purpose
-		public bool Delete(string pOId)
+		public bool Delete(string pId)
 		{
-			throw new System.NotImplementedException();
+			var success = true;
+			try
+			{
+				var user = applicationDbContext.Users.FirstOrDefault(x => x.Id == pId);
+				applicationDbContext.Users.Remove(user);
+			}
+			catch (Exception)
+			{
+				success = false;
+			}
+			applicationDbContext.SaveChanges();
+			return success;
 		}
 
 		public IQueryable<ApplicationUser> GetAll()
 		{
-			throw new System.NotImplementedException();
+			return applicationDbContext.Users;
 		}
+
+		#region Not Implemented on purpose
 
 		public string Create(ApplicationUser pEntity)
 		{

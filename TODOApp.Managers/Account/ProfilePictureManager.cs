@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.IO;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using TODOApp.DataAccessLayer.Models;
 using TODOApp.DataAccessLayer.Repository;
 using TODOApp.Managers.Base;
@@ -14,9 +11,10 @@ namespace TODOApp.Managers.Account
 {
 	public class ProfilePictureManager : BaseManager<ApplicationUser, IApplicationUserRepository, ProfilePictureViewModel>
 	{
-		public ProfilePictureManager(IApplicationUserRepository repository) : base(repository)
+		public ProfilePictureManager(IApplicationUserRepository repository, IMapper mapper) : base(repository, mapper)
 		{
 		}
+
 		public void SetUser(ApplicationUser applicationUser)
 		{
 			this.entity = applicationUser;

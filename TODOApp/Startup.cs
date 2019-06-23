@@ -12,6 +12,10 @@ using TODOApp.DataAccessLayer.Repository;
 using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.Managers;
 using TODOApp.Managers.Account;
+using TODOApp.Managers.User;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using System;
 
 namespace TODOApp
 {
@@ -51,6 +55,14 @@ namespace TODOApp
 			})
 			.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+
+			// change camelCase Json results to PascalCase
+			services.AddMvc()
+					.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+			
+
 			services.AddKendo();
 			// repositories
 			services.AddTransient<ITodoItemRepository, TodoItemRepository>();
@@ -58,6 +70,7 @@ namespace TODOApp
 
 			//managers
 			services.AddTransient<ProfilePictureManager>();
+			services.AddTransient<UserManager>();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

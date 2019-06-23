@@ -11,14 +11,14 @@
 	{
 
 		var imgSrc = await UserManager.GetBase64EncodedProfilePicture(User);
-		<div class="nav navbar-nav navbar-right">
+		<div class="nav navbar-nav navbar-right" style="padding-left:15px;">
 			<img src="@imgSrc" width="50" height="50" />
 			<button type="button" id="btnUploadPhoto" class="btn btn-link navbar-btn navbar-link" data-url="@Url.Action("ProfilePicture", "Account")">Change Photo</button>
 		</div>
 	}
 	else
 	{
-		<div class="nav navbar-nav navbar-right">
+		<div class="nav navbar-nav navbar-right" style="padding-left:15px;">
 			<button type="button" id="btnUploadPhoto" class="btn btn-link navbar-btn navbar-link" data-url="@Url.Action("ProfilePicture", "Account")">Upload Photo</button>
 		</div>
 	}
