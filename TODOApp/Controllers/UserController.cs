@@ -1,15 +1,15 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
-using TODOApp.Managers.User;
+using TODOApp.Interface.Manager;
 using TODOApp.ViewModels.User;
 
 namespace TODOApp.Controllers
 {
     public class UserController : Controller
     {
-		private UserManager userManager;
-		public UserController(UserManager userManager)
+		private IUserManager userManager;
+		public UserController(IUserManager userManager)
 		{
 			this.userManager = userManager;
 		}

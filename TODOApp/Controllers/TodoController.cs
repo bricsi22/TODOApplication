@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TODOApp.Managers.User;
+using TODOApp.Interface.Manager;
 
 namespace TODOApp.Controllers
 {
     public class TodoController : Controller
     {
-		private UserManager userManager;
-		public TodoController(UserManager userManager)
+		private IUserManager userManager;
+		public TodoController(IUserManager userManager)
 		{
 			this.userManager = userManager;
 		}

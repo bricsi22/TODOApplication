@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TODOApp.Interface.Repository;
 using TODOApp.ViewModels;
 
 namespace TODOApp.Controllers
