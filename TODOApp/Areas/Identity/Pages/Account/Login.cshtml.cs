@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using TODOApp.DataAccessLayer.Models;
+using TODOApp.Data;
 
 namespace TODOApp.Areas.Identity.Pages.Account
 {

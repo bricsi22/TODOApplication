@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TODOApp.Interface\TODOApp.Interface.csproj" />
+  </ItemGroup>
+
 </Project>

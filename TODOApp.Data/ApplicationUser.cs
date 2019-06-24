@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace TODOApp.DataAccessLayer.Models
+namespace TODOApp.Data
 {
 	public class ApplicationUser : IdentityUser
 	{

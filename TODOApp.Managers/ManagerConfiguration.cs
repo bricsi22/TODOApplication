@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TODOApp.Managers.Base;
+using TODOApp.Interface.Manager;
+using TODOApp.Managers.Account;
 using TODOApp.Managers.User;
 
 namespace TODOApp.Managers
@@ -8,7 +9,9 @@ namespace TODOApp.Managers
 	{
 		public static void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddTransient<BaseManager, TodoManager>();
+			services.AddTransient<IProfilePictureManager, ProfilePictureManager>();
+			services.AddTransient<ITodoManager, TodoManager>();
+			services.AddTransient<IUserManager, UserManager>();
 		}
 	}
 }

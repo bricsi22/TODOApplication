@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TODOApp.Interface.Manager;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.Managers;
-using TODOApp.Managers.Account;
 using TODOApp.ViewModels.Account;
 
 namespace TODOApp.Controllers
@@ -10,9 +10,9 @@ namespace TODOApp.Controllers
 	// user already authenticated, access denied if not authenticated
     public class AccountController : Controller
     {
-		private ProfilePictureManager profilePictureManager;
+		private IProfilePictureManager profilePictureManager;
 		private UserManagerExtended userManagerExtended;
-		public AccountController(ProfilePictureManager profilePictureManager,
+		public AccountController(IProfilePictureManager profilePictureManager,
 								 UserManagerExtended userManagerExtended)
 		{
 			this.profilePictureManager = profilePictureManager;

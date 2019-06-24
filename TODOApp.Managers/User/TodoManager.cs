@@ -1,15 +1,17 @@
 ﻿
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TODOApp.DataAccessLayer.Models;
-using TODOApp.DataAccessLayer.Repository;
+using TODOApp.Data;
+using TODOApp.Interface.Manager;
+using TODOApp.Interface.Repository;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.Managers.Base;
 using TODOApp.ViewModels.User;
 
 namespace TODOApp.Managers.User
 {
-	public class TodoManager : BaseManager<TodoItem, ITodoItemRepository, UserTodoItemViewModel, TodoItemSearchCriteria, long>
+	public class TodoManager : BaseManager<TodoItem, ITodoItemRepository, UserTodoItemViewModel, TodoItemSearchCriteria, long>,
+							   ITodoManager
 	{
 		public TodoManager(ITodoItemRepository todoItemRepository, 
 						   IMapper mapper,

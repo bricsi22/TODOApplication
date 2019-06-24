@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TODOApp.DataAccessLayer.Models;
+using TODOApp.Data;
 using TODOApp.ViewModels.User;
 
 namespace TODOApp.Managers

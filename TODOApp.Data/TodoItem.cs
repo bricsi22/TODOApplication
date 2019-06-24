@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TODOApp.DataAccessLayer.Models
+namespace TODOApp.Data
 {
-    public class TodoItem
-    {
+	public class TodoItem
+	{
 		[Key]
 		public long Id { get; set; }
 

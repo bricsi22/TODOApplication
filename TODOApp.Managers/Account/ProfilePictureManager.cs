@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using TODOApp.DataAccessLayer.Models;
-using TODOApp.DataAccessLayer.Repository;
+using TODOApp.Data;
+using TODOApp.Interface.Manager;
+using TODOApp.Interface.Repository;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.Managers.Base;
 using TODOApp.Managers.HelperExtensions;
@@ -10,7 +11,8 @@ using TODOApp.ViewModels.Account;
 
 namespace TODOApp.Managers.Account
 {
-	public class ProfilePictureManager : BaseManager<ApplicationUser, IApplicationUserRepository, ProfilePictureViewModel, UserSearchCriteria, string>
+	public class ProfilePictureManager : BaseManager<ApplicationUser, IApplicationUserRepository, ProfilePictureViewModel, UserSearchCriteria, string>,
+										 IProfilePictureManager
 	{
 		public ProfilePictureManager(IApplicationUserRepository repository, 
 									 IMapper mapper, 

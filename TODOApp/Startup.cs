@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using TODOApp.DataAccessLayer.Models;
-using TODOApp.DataAccessLayer.Repository;
 using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.Managers;
 using TODOApp.Managers.Account;
@@ -18,6 +16,7 @@ using AutoMapper;
 using System;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.DataAccessLayer;
+using TODOApp.Data;
 
 namespace TODOApp
 {
@@ -68,6 +67,7 @@ namespace TODOApp
 			services.AddKendo();
 			// repositories
 			RepositoryConfiguration.ConfigureServices(services);
+			ManagerConfiguration.ConfigureServices(services);
 
 
 

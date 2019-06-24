@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TODOApp.DataAccessLayer.Models;
+using TODOApp.Data;
 using TODOApp.Managers.HelperExtensions;
 
 namespace TODOApp.Managers

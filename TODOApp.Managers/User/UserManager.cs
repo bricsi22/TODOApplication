@@ -2,15 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using TODOApp.DataAccessLayer.Models;
-using TODOApp.DataAccessLayer.Repository;
+using TODOApp.Data;
+using TODOApp.Interface.Manager;
+using TODOApp.Interface.Repository;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.Managers.Base;
 using TODOApp.ViewModels.User;
 
 namespace TODOApp.Managers.User
 {
-	public class UserManager : BaseManager<ApplicationUser, IApplicationUserRepository, UserViewModel, UserSearchCriteria, string>
+	public class UserManager : BaseManager<ApplicationUser, IApplicationUserRepository, UserViewModel, UserSearchCriteria, string>,
+							   IUserManager
 	{
 		public UserManager(IApplicationUserRepository applicationUserRepository, 
 						   IMapper mapper,

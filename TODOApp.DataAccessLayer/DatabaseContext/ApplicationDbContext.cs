@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TODOApp.DataAccessLayer.Models;
+using TODOApp.Data;
 
 namespace TODOApp.DataAccessLayer.DatabaseContext
 {

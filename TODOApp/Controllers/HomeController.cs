@@ -1,16 +1,14 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TODOApp.DataAccessLayer.Repository;
+using TODOApp.Interface.Repository;
 using TODOApp.ViewModels;
 
 namespace TODOApp.Controllers
 {
     public class HomeController : Controller
     {
-		private ITodoItemRepository todoItemRepository;
-		public HomeController(ITodoItemRepository todoItemRepository)
+		public HomeController()
 		{
-			this.todoItemRepository = todoItemRepository;
 		}
         public IActionResult Index()
         {
