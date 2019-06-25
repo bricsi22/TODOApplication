@@ -42,12 +42,8 @@ namespace TODOApp.Controllers
 		[HttpPost]
 		public IActionResult DeleteUser([DataSourceRequest] DataSourceRequest request, UserViewModel userViewModel)
 		{
-			if (userViewModel != null && ModelState.IsValid)
-			{
-				userManager.DeleteViewModel(userViewModel);
-			}
-
-			return Json(new[] { userViewModel }.ToDataSourceResult(request, ModelState));
+			userManager.DeleteViewModel(userViewModel);
+			return Json(new[] { userViewModel }.ToDataSourceResult(request));
 		}
 
 		#endregion

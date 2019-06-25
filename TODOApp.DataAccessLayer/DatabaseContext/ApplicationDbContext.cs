@@ -17,7 +17,18 @@ namespace TODOApp.DataAccessLayer.DatabaseContext
 		{
 			base.OnModelCreating(builder);
 
-			builder.Entity<TodoItem>().HasOne(p => p.ApplicationUser).WithMany(m => m.TodoItems).HasForeignKey(f => f.UserId);
+			builder.Entity<TodoItem>()
+				.HasOne(p => p.ApplicationUser)
+				.WithMany(m => m.TodoItems)
+				.HasForeignKey(f => f.UserId);
+
+			builder.Entity<ApplicationUser>()
+				.HasMany(x => x.TodoItems)
+				.WithOne(o => o.ApplicationUser)
+				.HasForeignKey(f => f.UserId)
+				.IsRequired()
+				.OnDelete(DeleteBehavior.Cascade);
+
 		}
 	}
 }

@@ -44,7 +44,7 @@ namespace TODOApp.Managers.User
 							  Id = user.Id,
 							  FirstName = user.FirstName,
 							  PrimaryName = user.PrimaryName,
-							  UserEmail = user.Email
+							  UserEmail = user.Email,
 						  });
 			return result.AsNoTracking();
 		}
@@ -68,12 +68,6 @@ namespace TODOApp.Managers.User
 			mapper.Map(entity, viewModel);
 			return viewModel;
 		}
-
-		#endregion
-
-		#region User Todo Items related methods
-
-
 
 		#endregion
 	}

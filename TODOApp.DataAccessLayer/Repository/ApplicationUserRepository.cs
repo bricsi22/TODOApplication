@@ -44,12 +44,12 @@ namespace TODOApp.DataAccessLayer.Repository
 			{
 				var user = applicationDbContext.Users.FirstOrDefault(x => x.Id == pId);
 				applicationDbContext.Users.Remove(user);
+				applicationDbContext.SaveChanges();
 			}
 			catch (Exception)
 			{
 				success = false;
 			}
-			applicationDbContext.SaveChanges();
 			return success;
 		}
 

@@ -27,8 +27,10 @@ namespace TODOApp.DataAccessLayer.Repository
 			if (result != null)
 			{
 				dbContext.TodoItem.Remove(result);
+				dbContext.SaveChanges();
 				return true;
 			}
+
 			return false;
 		}
 
@@ -53,6 +55,8 @@ namespace TODOApp.DataAccessLayer.Repository
 				result.UserId = pEntity.UserId;
 				result.Name = pEntity.Name;
 				result.Description = pEntity.Description;
+				dbContext.TodoItem.Update(result);
+				dbContext.SaveChanges();
 			}
 			catch(Exception)
 			{

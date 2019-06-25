@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Areas\Todo\" />
+    <Folder Include="Views\Shared\EditorTemplates\" />
     <Folder Include="wwwroot\css\fonts\" />
   </ItemGroup>
 

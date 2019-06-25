@@ -43,6 +43,7 @@ function GetUserTodoItems(userId) {
 	if (!userTodoItemsWindow) {
 		userTodoItemsWindow = $("#UserTodoItemsWindow").kendoWindow({
 			width: "600px",
+			height: "620px",
 			title: "User Todo List",
 			modal: true,
 			visible: false,
@@ -59,4 +60,10 @@ function GetUserTodoItems(userId) {
 	userTodoItemsWindow.refresh(refreshUrl);
 	userTodoItemsWindow.center();
 	userTodoItemsWindow.open();
+}
+
+function getTodoGridAdditionaData() {
+	return {
+		userId: $("#Id").val()
+	}
 }

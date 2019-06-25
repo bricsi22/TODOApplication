@@ -1,6 +1,8 @@
 ﻿
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TODOApp.Data;
 using TODOApp.Interface.Manager;
 using TODOApp.Interface.Repository;
@@ -28,6 +30,39 @@ namespace TODOApp.Managers.User
 			return userTodoItemViewModel;
 		}
 
+		public IQueryable<UserTodoItemViewModel> GetUserTodoItems(string userId)
+		{
+			var result = (from todo in repository.GetAll()
+						  where todo.UserId == userId
+						  select new UserTodoItemViewModel
+						  {
+							  DeadLine = todo.DeadLine,
+							  Name = todo.Name,
+							  Id = todo.Id,
+							  Description = todo.Description,
+							  UserId = todo.UserId
+						  });
+			return result.AsNoTracking();
+		}
 
+		public UserTodoItemViewModel Create(UserTodoItemViewModel model)
+		{
+			var todoItem = new TodoItem();
+			mapper.Map(model, todoItem);
+			model.Id = repository.Create(todoItem);
+			return model;
+		}
+
+		public void Update(UserTodoItemViewModel model)
+		{
+			var todoItem = repository.Get(model.Id);
+			mapper.Map(model, todoItem);
+			repository.Update(todoItem);
+		}
+
+		public void Delete(UserTodoItemViewModel model)
+		{
+			repository.Delete(model.Id);
+		}
 	}
 }

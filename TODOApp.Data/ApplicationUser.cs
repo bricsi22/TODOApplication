@@ -11,6 +11,6 @@ namespace TODOApp.Data
 
 		public byte[] ProfilePicture { get; set; }
 
-		public List<TodoItem> TodoItems { get; set; }
+		public ICollection<TodoItem> TodoItems { get; set; }
 	}
 }
