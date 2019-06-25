@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TODOApp.Data\TODOApp.Data.csproj" />
     <ProjectReference Include="..\TODOApp.ViewModels\TODOApp.ViewModels.csproj" />
   </ItemGroup>
