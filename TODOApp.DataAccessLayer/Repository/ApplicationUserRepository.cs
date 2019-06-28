@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using TODOApp.Data;
 using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.Interface.Repository;
@@ -21,34 +20,28 @@ namespace TODOApp.DataAccessLayer.Repository
 
 		public bool Update(ApplicationUser pEntity)
 		{
-			var success = true;
-			try
+			var success = false;
+			var user = applicationDbContext.Users.FirstOrDefault(x => x.Id == pEntity.Id);
+			if (user != null)
 			{
-				var user = applicationDbContext.Users.FirstOrDefault(x => x.Id == pEntity.Id);
 				user.FirstName = pEntity.FirstName;
 				user.PrimaryName = pEntity.PrimaryName;
 				user.Email = pEntity.Email;
 				user.ProfilePicture = pEntity.ProfilePicture;
+				applicationDbContext.SaveChanges();
+				success = true;
 			}
-			catch (Exception)
-			{
-				success = false;
-			}
-			applicationDbContext.SaveChanges();
 			return success;
 		}
 		public bool Delete(string pId)
 		{
-			var success = true;
-			try
+			var success = false;
+			var user = applicationDbContext.Users.FirstOrDefault(x => x.Id == pId);
+			if (user != null)
 			{
-				var user = applicationDbContext.Users.FirstOrDefault(x => x.Id == pId);
 				applicationDbContext.Users.Remove(user);
 				applicationDbContext.SaveChanges();
-			}
-			catch (Exception)
-			{
-				success = false;
+				success = true;
 			}
 			return success;
 		}

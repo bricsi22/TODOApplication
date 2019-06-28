@@ -53,11 +53,11 @@ namespace TODOApp.Managers.User
 			return model;
 		}
 
-		public void Update(UserTodoItemViewModel model)
+		public bool Update(UserTodoItemViewModel model)
 		{
 			var todoItem = repository.Get(model.Id);
 			mapper.Map(model, todoItem);
-			repository.Update(todoItem);
+			return repository.Update(todoItem);
 		}
 
 		public void Delete(UserTodoItemViewModel model)

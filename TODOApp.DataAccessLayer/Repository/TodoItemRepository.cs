@@ -23,15 +23,16 @@ namespace TODOApp.DataAccessLayer.Repository
 
 		public bool Delete(long pId)
 		{
+			var success = false;
 			var result = dbContext.TodoItem.FirstOrDefault(x => x.Id == pId);
 			if (result != null)
 			{
 				dbContext.TodoItem.Remove(result);
 				dbContext.SaveChanges();
-				return true;
+				success = true;
 			}
 
-			return false;
+			return success;
 		}
 
 		public TodoItem Get(long pId)
@@ -47,20 +48,17 @@ namespace TODOApp.DataAccessLayer.Repository
 
 		public bool Update(TodoItem pEntity)
 		{
-			var updateSuccess = true;
-			try
+			var updateSuccess = false;
+			var result = dbContext.TodoItem.FirstOrDefault(x => x.Id == pEntity.Id);
+			if (result != null)
 			{
-				var result = dbContext.TodoItem.FirstOrDefault(x => x.Id == pEntity.Id);
 				result.DeadLine = pEntity.DeadLine;
 				result.UserId = pEntity.UserId;
 				result.Name = pEntity.Name;
 				result.Description = pEntity.Description;
 				dbContext.TodoItem.Update(result);
 				dbContext.SaveChanges();
-			}
-			catch(Exception)
-			{
-				updateSuccess = false;
+				updateSuccess = true;
 			}
 			return updateSuccess;
 		}

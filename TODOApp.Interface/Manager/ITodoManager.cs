@@ -13,7 +13,7 @@ namespace TODOApp.Interface.Manager
 
 		UserTodoItemViewModel Create(UserTodoItemViewModel model);
 
-		void Update(UserTodoItemViewModel model);
+		bool Update(UserTodoItemViewModel model);
 
 		void Delete(UserTodoItemViewModel model);
 	}
