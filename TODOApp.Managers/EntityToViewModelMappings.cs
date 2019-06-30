@@ -9,7 +9,9 @@ namespace TODOApp.Managers
 		public EntityToViewModelMappings()
 		{
 			// vica
-			CreateMap<UserViewModel, ApplicationUser>().ForMember(d => d.Id, option => option.Ignore());
+			CreateMap<UserViewModel, ApplicationUser>()
+				.ForMember(d => d.Id, option => option.Ignore())
+				.ForMember(d => d.Email, option => option.MapFrom(m => m.UserEmail));
 			// versa, currenty not used
 			CreateMap<ApplicationUser, UserViewModel>();
 
