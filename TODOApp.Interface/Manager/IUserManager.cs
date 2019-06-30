@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using TODOApp.Data;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.ViewModels.User;
 
@@ -19,5 +20,9 @@ namespace TODOApp.Interface.Manager
 		void DeleteViewModel(UserViewModel viewModel);
 
 		UserViewModel GetViewModelById(string id);
+
+		IQueryable<ApplicationUser> GetUsersWithDeadLine();
+
+		void SendEmailNotificationsAboutDeadLines();
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using TODOApp.Data;
 using TODOApp.Interface.Manager;
@@ -14,10 +15,16 @@ namespace TODOApp.Managers.User
 	public class UserManager : BaseManager<ApplicationUser, IApplicationUserRepository, UserViewModel, UserSearchCriteria, string>,
 							   IUserManager
 	{
+		private readonly ITodoItemRepository todoItemRepository;
+		private readonly IEmailManager emailManager;
 		public UserManager(IApplicationUserRepository applicationUserRepository, 
 						   IMapper mapper,
-						   UserSearchCriteria searchCriteria) : base(applicationUserRepository, mapper, searchCriteria)
+						   UserSearchCriteria searchCriteria,
+						   ITodoItemRepository todoItemRepository,
+						   IEmailManager emailManager) : base(applicationUserRepository, mapper, searchCriteria)
 		{
+			this.todoItemRepository = todoItemRepository;
+			this.emailManager = emailManager;
 		}
 		#region User related methods
 		public IndexViewModel GetIndexViewModel(IUrlHelper url)
@@ -67,6 +74,30 @@ namespace TODOApp.Managers.User
 			entity = repository.Get(id);
 			mapper.Map(entity, viewModel);
 			return viewModel;
+		}
+
+		#endregion
+
+		#region Automated email sending related code
+
+		public IQueryable<ApplicationUser> GetUsersWithDeadLine()
+		{
+			var actualDay = DateTime.Now;
+			var nextDay = DateTime.Now.AddDays(1);
+			var result = (from user in repository.GetAll()
+						  join todoItem in todoItemRepository.GetAll() on user.Id equals todoItem.UserId
+						  where actualDay <= todoItem.DeadLine && todoItem.DeadLine <= nextDay
+						  select user);
+			return result.AsNoTracking();
+		}
+
+		public void SendEmailNotificationsAboutDeadLines()
+		{
+			var users = GetUsersWithDeadLine();
+			foreach(var user in users)
+			{
+				emailManager.SendEmail(user);
+			}
 		}
 
 		#endregion

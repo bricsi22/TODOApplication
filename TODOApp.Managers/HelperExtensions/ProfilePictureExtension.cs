@@ -5,7 +5,7 @@ namespace TODOApp.Managers.HelperExtensions
 {
 	public static class ProfilePictureExtension
 	{
-		public static string GetBase64EncodedProfilePictureFromByteArray(byte[] profilePicutre)
+		public static string GetBase64EncodedProfilePictureFromByteArray(this byte[] profilePicutre)
 		{
 			var stringSrc = "";
 			if (profilePicutre != null)

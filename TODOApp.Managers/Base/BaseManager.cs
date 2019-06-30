@@ -7,7 +7,7 @@ namespace TODOApp.Managers.Base
 	public abstract class BaseManager<EFEntity, RepositoryInteface, ViewModel, SearchCriteria, PrimaryKeyType> where SearchCriteria : ISearchCriteria<PrimaryKeyType>
 	{
 		protected EFEntity entity;
-		protected RepositoryInteface repository;
+		protected readonly RepositoryInteface repository;
 		protected ViewModel viewModel;
 		protected IMapper mapper;
 

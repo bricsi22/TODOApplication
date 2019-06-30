@@ -9,14 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.Managers;
-using TODOApp.Managers.Account;
-using TODOApp.Managers.User;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using System;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.DataAccessLayer;
 using TODOApp.Data;
+using TODOApp.HostedServices;
 
 namespace TODOApp
 {
@@ -65,19 +64,14 @@ namespace TODOApp
 			
 
 			services.AddKendo();
-			// repositories
+
 			RepositoryConfiguration.ConfigureServices(services);
+			HostedServicesConfiguration.ConfigureServices(services);
+
+			// managers
 			ManagerConfiguration.ConfigureServices(services);
 
-
-
-			//managers
-			ManagerConfiguration.ConfigureServices(services);
-			services.AddTransient<ProfilePictureManager>();
-			services.AddTransient<UserManager>();
-			services.AddTransient<TodoManager>();
-
-			//search criterias
+			// search criterias
 			services.AddTransient<TodoItemSearchCriteria>();
 			services.AddTransient<UserSearchCriteria>();
 		}

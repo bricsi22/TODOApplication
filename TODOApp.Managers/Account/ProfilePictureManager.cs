@@ -35,7 +35,7 @@ namespace TODOApp.Managers.Account
 			var viewModel = new ProfilePictureViewModel();
 			entity = repository.Get(searchCriteria.Id);
 			viewModel.UserName = entity.FirstName + " " + entity.PrimaryName;
-			viewModel.Base64ProfilePicture = ProfilePictureExtension.GetBase64EncodedProfilePictureFromByteArray(entity.ProfilePicture);
+			viewModel.Base64ProfilePicture = entity.ProfilePicture.GetBase64EncodedProfilePictureFromByteArray();
 			return viewModel;
 		}
 	}

@@ -42,7 +42,7 @@ namespace TODOApp.Managers
 
 		public async Task<string> GetBase64EncodedProfilePicture(ClaimsPrincipal claimsPrincipal) {
 			var user = await GetUserAsync(claimsPrincipal);
-			var stringSrc = ProfilePictureExtension.GetBase64EncodedProfilePictureFromByteArray(user.ProfilePicture);
+			var stringSrc = user.ProfilePicture.GetBase64EncodedProfilePictureFromByteArray();
 			return stringSrc;
 		}
 	}

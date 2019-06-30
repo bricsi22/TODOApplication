@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TODOApp", "TODOApp\TODOApp.csproj", "{2EE10597-4BD0-40E3-95C6-8F4E1D58B23A}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TODOApp.Interface", "TODOApp.Interface\TODOApp.Interface.csproj", "{12FE93B9-C3D6-48C2-99D0-8C7977D4CA0C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TODOApp.Data", "TODOApp.Data\TODOApp.Data.csproj", "{DEDE5478-6126-47B5-85EB-40521985C9F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TODOApp.HostedServices", "TODOApp.HostedServices\TODOApp.HostedServices.csproj", "{1C12E3D6-FCC2-4452-A303-7F3CE18C21EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DEDE5478-6126-47B5-85EB-40521985C9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEDE5478-6126-47B5-85EB-40521985C9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEDE5478-6126-47B5-85EB-40521985C9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C12E3D6-FCC2-4452-A303-7F3CE18C21EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C12E3D6-FCC2-4452-A303-7F3CE18C21EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C12E3D6-FCC2-4452-A303-7F3CE18C21EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C12E3D6-FCC2-4452-A303-7F3CE18C21EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
