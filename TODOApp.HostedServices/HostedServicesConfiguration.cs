@@ -7,7 +7,7 @@ namespace TODOApp.HostedServices
 	{
 		public static void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddHostedService<EmailHostedService>();
+			services.AddHostedService<EmailHostedService>();
 		}
 	}
 }

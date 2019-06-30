@@ -31,12 +31,8 @@ namespace TODOApp.Managers.Email
 
 			using (var client = new SmtpClient())
 			{
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.Connect("smtp.gmail.com", 587, false);
 
-				client.AuthenticationMechanisms.Remove("XOAUTH2");
-				client.Connect("smtp.gmail.com", 465, true);
-
-				// Note: only needed if the SMTP server requires authentication
 				var password = passwordManager.Decrypt(EmailConstants.EmailPasswordEncrypted, EmailConstants.EmailPasswordKey);
 				client.Authenticate(EmailConstants.EmailAddress, password);
 
