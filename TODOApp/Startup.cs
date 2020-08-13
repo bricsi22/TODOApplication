@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using TODOApp.DataAccessLayer.DatabaseContext;
 using TODOApp.Managers;
-using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using System;
 using TODOApp.Interface.SearchCriteria;
 using TODOApp.DataAccessLayer;
 using TODOApp.Data;
 using TODOApp.HostedServices;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace TODOApp
 {
@@ -47,21 +47,24 @@ namespace TODOApp
 				.AddUserManager<UserManagerExtended>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc(config => {
-				var policy = new AuthorizationPolicyBuilder()
-									.RequireAuthenticatedUser()
-									.Build();
-				config.Filters.Add(new AuthorizeFilter(policy));
-			})
-			.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(setupAction => 
+                            {
+                                setupAction.EnableEndpointRouting = false;
+                                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+                                setupAction.Filters.Add(new AuthorizeFilter(policy));
+                            }).AddJsonOptions(jsonOptions =>
+                            {   // change camelCase Json results to PascalCase
+                                jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+                            })
+                            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
-			// change camelCase Json results to PascalCase
-			services.AddMvc()
-					.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            
+            services.AddRazorPages();
 
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-			
+
 
 			services.AddKendo();
 
@@ -77,7 +80,7 @@ namespace TODOApp
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 			UpdateDatabase(app);
 
@@ -98,13 +101,14 @@ namespace TODOApp
 
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
-		}
+        }
 
 		private static void UpdateDatabase(IApplicationBuilder app)
 		{
