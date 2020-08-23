@@ -1,6 +1,9 @@
-﻿using Kendo.Mvc.Extensions;
+﻿using CsvHelper;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.IO;
 using TODOApp.Interface.Manager;
 using TODOApp.ViewModels.User;
 
@@ -25,6 +28,13 @@ namespace TODOApp.Controllers
 		public IActionResult GetUsers([DataSourceRequest]DataSourceRequest request)
         {
 			var result = userManager.GetUserViewModels();
+			using(var streamWriter = new StreamWriter(@"C:\temp\csvfile.csv"))
+			{
+				using (var csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
+				{
+					csvWriter.WriteRecords(result);
+				}
+			}
 			return Json(result.ToDataSourceResult(request));
         }
 
